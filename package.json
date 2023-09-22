@@ -3,17 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
-    "clean":"rm -rf **/index.min*",
-    "minifify":"npm run clean && node src/index.js public/index.js",
-    "minifify-and-run":"npm run minifify && npm start",
-    "start":"node public/index.js"
+    "clean": "rm -rf **/index.min*",
+    "minifify": "npm run clean && node src/index.js public/index.js",
+    "minifify-and-run": "npm run minifify && npm start",
+    "start": "node public/index.min.js"
   },
   "keywords": [],
   "engines": {
-    "node":"18"
+    "node": "18"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Rakesh Kumar Singh",
+  "license": "ISC",
+  "dependencies": {
+    "acorn": "^8.8.2",
+    "escodegen": "^2.0.0"
+  }
 }
