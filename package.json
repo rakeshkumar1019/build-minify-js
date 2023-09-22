@@ -1,0 +1,19 @@
+{
+  "name": "buildjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "clean":"rm -rf **/index.min*",
+    "minifify":"npm run clean && node src/index.js public/index.js",
+    "minifify-and-run":"npm run minifify && npm start",
+    "start":"node public/index.js"
+  },
+  "keywords": [],
+  "engines": {
+    "node":"18"
+  },
+  "author": "",
+  "license": "ISC"
+}
