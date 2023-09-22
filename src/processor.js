@@ -7,7 +7,9 @@ export default class Processor {
   }
   static #generateMinifiedCode ({originalCode,minifiedFilePath,minifiedLocalFilePath}){
      const minifier = new Minifier();
-     minifier.minifyCodeAndReturnMapNames(originalCode);
+    const {minifiedCode, nameMap} = minifier.minifyCodeAndReturnMapNames(originalCode);
+    const sourceMapURL= `//# sourceMappingURL=${minifiedLocalFilePath}.map`; 
+    fs.writeFileSync(minifiedFilePath,`${minifiedCode}\n${sourceMapURL}`); 
   }
    static run(filename){
       const originalCode = fs.readFileSync(filename,'utf-8');

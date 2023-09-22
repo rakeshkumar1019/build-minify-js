@@ -1,6 +1,6 @@
 import * as acorn from "acorn" //generate AST
 import escodegen from "escodegen"; //validates JS code , removes comments & line breaks
-
+import ASTHelper from "./ast-helper.js";
 export default class Minifier {
     #nameMap= new Map()
     #alphabet = Array.from('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
@@ -30,15 +30,40 @@ export default class Minifier {
         this.#updateNameMap(oldName,newName,declaration);
         declaration.name = newName;
     }
-
+  
+    #traverse(node){
+        const astHelper = new ASTHelper();
+        astHelper
+        .setVariableDeclarationHook((node)=>{
+            for(const declaration of node.declarations){
+              this.#handleDeclaration(declaration.id);
+            }
+        })
+        .setFunctionDeclarationHook((node)=>{
+            this.#handleDeclaration(node.id)
+            for(const param of node.params){
+                this.#handleDeclaration(param);
+            }
+        })
+        .setIdentifierHook((node)=>{
+            const oldName = node.name;
+            const name = this.#nameMap.get(oldName)?.newName;
+            if(!name) return;
+            this.#updateNameMap(oldName,name,node);
+            node.name = name;
+        })
+        .traverse(node);
+    }
    minifyCodeAndReturnMapNames(originalCode){
      const originalAST = acorn.parse(originalCode,{
         ecmaVersion:2022,
         locations:true
      }) 
-     this.#handleDeclaration(originalAST.body[0].id);
-     console.log(JSON.stringify(originalAST,null,2))
+     this.#traverse(originalAST);
      const minifiedCode = escodegen.generate(originalAST,{format:{compact:true}});
-
+     return {
+        minifiedCode,
+        nameMap: this.#nameMap
+     }
     }
 }
