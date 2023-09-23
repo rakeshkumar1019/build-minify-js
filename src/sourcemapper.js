@@ -1,6 +1,5 @@
 import {SourceMapGenerator } from "source-map"
 import * as acorn from 'acorn'
-import escodegen from "escodegen"
 import ASTHelper from "./ast-helper.js"
 export default class SourceMapper{
     #minifiedLocalFilePath
@@ -48,7 +47,7 @@ export default class SourceMapper{
 
         this.#sourceMaps.setSourceContent(this.#minifiedLocalFilePath, originalCode)
         originalItems.forEach(({newName, positions})=>{
-           const minifiedPostions = this.#minifiedItems.get(newName).positions
+           const minifiedPostions = this.#minifiedItems.get(newName)?.positions
            /*
            remove the first line of the minified code [replicated]
            [
@@ -57,8 +56,8 @@ export default class SourceMapper{
             Position { line: 1, column: 50 }
           ]
           */
-           minifiedPostions.shift();
-           minifiedPostions.forEach((minifiedPostion,index)=>{
+           minifiedPostions?.shift();
+           minifiedPostions?.forEach((minifiedPostion,index)=>{
             const originalPostions = positions[index]
             const mappings = {
                 source: this.#minifiedLocalFilePath,

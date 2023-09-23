@@ -1,9 +1,14 @@
 import * as acorn from "acorn" //generate AST
 import escodegen from "escodegen"; //validates JS code , removes comments & line breaks
 import ASTHelper from "./ast-helper.js";
+import { variableNames } from "./utils.js";
 export default class Minifier {
     #nameMap= new Map()
-    #alphabet = Array.from('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    #alphabet
+    constructor(){
+        this.#alphabet = variableNames;
+    }
+    // #alphabet = Array.from('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     #generateNameIfNotExisting(name){
         if(this.#nameMap.has(name)){
             return this.#nameMap.get(name);
@@ -65,5 +70,6 @@ export default class Minifier {
         minifiedCode,
         nameMap: this.#nameMap
      }
+
     }
 }
