@@ -16,11 +16,11 @@ export default class Minifier {
     #updateNameMap(oldName,newName,{loc:{start}}){
         if(this.#nameMap.has(oldName)){
             const nameMap = this.#nameMap.get(oldName);
-            nameMap.postion.push(start);
+            nameMap.positions.push(start);
             this.#nameMap.set(oldName,nameMap);
             return;
         }
-        this.#nameMap.set(oldName,{newName,postion:[start]});
+        this.#nameMap.set(oldName,{newName,positions:[start]});
     }
 
     //declaration here means object's of AST
@@ -57,7 +57,7 @@ export default class Minifier {
    minifyCodeAndReturnMapNames(originalCode){
      const originalAST = acorn.parse(originalCode,{
         ecmaVersion:2022,
-        locations:true
+        locations:true,
      }) 
      this.#traverse(originalAST);
      const minifiedCode = escodegen.generate(originalAST,{format:{compact:true}});
