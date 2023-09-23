@@ -83,7 +83,7 @@ npm run minify
 ```
 npm run minify-and-run
 ```
--`start`: To run the minified `*.min.js` file.
+- `start`: To run the minified `*.min.js` file.
 ```
 npm start
 ```
