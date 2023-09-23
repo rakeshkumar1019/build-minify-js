@@ -1,4 +1,5 @@
 import fs from "node:fs"
+import chalk from "chalk"
 import { basename } from "node:path";
 import Minifier from "./minifier.js";
 import SourceMapper from "./sourcemapper.js";
@@ -42,6 +43,8 @@ export default class Processor {
         minifiedFilePath,
         minifiedLocalFilePath
       })
-      console.log(`Minified code and source map generated with success! ${filename}`)
+      console.log(chalk.whiteBright.bgGreen.bold(` minified code and source-map generated with success! `))
+      console.log(chalk.greenBright(` minified code at :${filename.replace('.js','.min.js')} `))
+      console.log(chalk.greenBright(` source-map code at :${filename.replace('.js','.min.js.map')} `))
    }
 }
