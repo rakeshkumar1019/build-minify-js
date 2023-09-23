@@ -1,12 +1,12 @@
 {
-  "name": "buildjs",
+  "name": "build-minify-js",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rakeshkumar1019/Build-JS.git"
+    "url": "https://github.com/rakeshkumar1019/build-minify-js.git"
   },
   "scripts": {
     "list": "node src/ascii-art.js && echo && ntl",
