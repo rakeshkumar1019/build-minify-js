@@ -9,7 +9,6 @@
     "url": "https://github.com/rakeshkumar1019/build-minify-js.git"
   },
   "scripts": {
-    "list": "node src/ascii-art.js && echo && ntl",
     "clean": "rm -rf **/index.min*",
     "minifify": "npm run clean && node src/index.js public/index.js",
     "minifify-and-run": "npm run minifify && npm start",
