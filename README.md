@@ -65,15 +65,6 @@ function a(b,c){return b+c;}a(10,26);
 
 
 ## Available Scripts
-- `list`: To list all the available commands.
-
-```bash
-npm run list
-```
-- `clean`: To delete all the `*.min.js` and `*.min.js.map` files.
-```
-npm run clean
-```
 - `minify`: To generate minified code and source maps.
 ```
 npm run minify
@@ -85,6 +76,10 @@ npm run minify-and-run
 - `start`: To run the minified `*.min.js` file.
 ```
 npm start
+```
+- `clean`: To delete all the `*.min.js` and `*.min.js.map` files.
+```
+npm run clean
 ```
 
 ## Contributing
